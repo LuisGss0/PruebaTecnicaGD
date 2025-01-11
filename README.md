@@ -1,66 +1,58 @@
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
 
-## About Laravel
+## CRUD de Usuarios
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+En este proyecto se realiza un CRUD básico de proyectos con datos como nombre, teléfono, correo y contraseña.
+El backend está compuesto en Laravel y el frontend se utiliza React con TailwindCSS para el diseño.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+Además del framework de Laravel y React, las tecnologías que se utilizan en este proyecto son las siguientes:
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+- PHP con una versión igual o superior a 8.2
+- Composer con versión 2.8.4 o superior
+- Inertia versión 2.0 o superior para manejar las conexiones entre el backend y las vistas en el frontend
+- Spatie versión 6.10 o superior para manejar los roles y permisos dentro del proyecto
+- Breeze con versión 2.3 o superior para manejar el registro de autenticación básica
+- TailwindCSS con versión 3.2.1 o superior
+- React 18.2.0 o superior
+- Axios 1.7.4 o superior
+- SweetAlert2 con versión 6.0 o superior
+- Node y NPM con versiones 10.9.0 o superior
+  
+Para la base de datos se está utilizando MySQL y el servidor de Apache con XAMPP, así que previamente se tendrán que iniciar estos servicios para un correcto funcionamiento.
 
-## Learning Laravel
+Dentro de la base de datos debe crearse una con el nombre de "prueba_tecnica_gd" (está marcado en el archivo .env en la variable DB_DATABASE). Puedes modificar el nombre en el archivo .env.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+## Configuración y ejecución local
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+Una vez clonado el repositorio se debe de asegurar de estar en la ruta correcta del proyecto.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+Se tendrá que abrir en consola (Recomendable en la consola de Visual Studio) y ejecutar el comando de `cd PruebaTecnicaGD` para asegurarse de entrar a la raíz del proyecto.
 
-## Laravel Sponsors
+El primer comando para configurarlo es crear el archivo `.env`. En este archivo se encuentra uno llamado `.env.example`, se puede hacer una copia de este en la misma ruta y cambiar el nombre por `.env`. También se puede usar el comando `cp .env.example .env` en la consola.
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+El segundo comando que se debe ejecutar es `composer install` para instalar las dependencias que ocupa Laravel.
 
-### Premium Partners
+Se debe generar una clave para la aplicación, así que se ejecuta el comando `php artisan key:generate`.
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+Después se debe ejecutar el comando `php artisan migrate --seed` para poder crear las tablas en la base de datos, así como llenarlas con algunos registros de pruebas.
 
-## Contributing
+Seguido de esto, se debe ejecutar el comando `php artisan serve` para ejecutar el backend.
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+Después se debe abrir una consola nueva sin cerrar la actual. En esta terminal, instalaremos las dependencias del frontend y ejecutaremos localmente el frontend.
 
-## Code of Conduct
+Si no se abre la consola en la ruta del proyecto, se deberá cambiar con el comando `cd PruebaTecnicaGD`.
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+Después de esto, ejecutar el comando `npm install`, esto instalará las dependencias del frontend.
 
-## Security Vulnerabilities
+Por último, se debe ejecutar el comando `npm run dev` para ejecutar el proyecto en local.
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+Para acceder a la aplicación en el navegador, deberemos ingresar la URL de `http://127.0.0.1:8000` o `localhost:8000`.
 
-## License
+## Acceso al sistema
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+Al ingresar a la página, debemos hacer clic en el texto que dice "Login" en la parte superior derecha. Esto abrirá un formulario de inicio de sesión, donde podremos acceder al sistema con el correo "admin@examplecom" y la contraseña "password". Este usuario tiene el rol de "admin" y puede acceder al CRUD completo de usuarios.
+
+También se puede acceder a la sección de "Register" para registrar un nuevo usuario. Este usuario tendrá el rol de "usuario" y solo podrá crear usuarios en el sistema, pero no podrá editarlos ni eliminarlos.
+
+Una vez dentro del sistema, en el TopBar se encontrará una sección llamada "Usuarios", donde se puede hacer clic y ver la lista de usuarios con sus respectivas acciones.
