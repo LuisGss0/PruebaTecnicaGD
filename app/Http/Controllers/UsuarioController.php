@@ -220,7 +220,7 @@ class UsuarioController extends Controller
 
             $usuario->save();
 
-            return $this->index()->with('success', 'Usuario creado correctamente');
+            return redirect()->route('usuarios.index')->with('success', 'Usuario creado correctamente');
         } catch (Exception $e) {
             return redirect()->back()->withErrors(['error' => 'Error al actualizar el usuario: ' . $e->getMessage()])->withInput();
         }
