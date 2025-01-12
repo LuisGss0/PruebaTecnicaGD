@@ -74,18 +74,19 @@ function Index({ auth, usuarios, role, permissions }) {
 
         axios
             .post(route("usuarios.uploadCsv"), formData)
-            .then((response) => {
+            .then(() => {
                 // Mostrar un mensaje de éxito
                 Swal.fire({
                     icon: "success",
                     title: "Usuarios registrados",
                     showConfirmButton: false,
                     timer: 1500,
-                });
-                // Cerrar el modal de subida de CSV
-                setOpenUploadCsvModal(false);
-                // actualizar la lista de usuarios
-                Inertia.reload({ only: ["usuarios"] });
+                }).then(() => {
+                    setOpenUploadCsvModal(false);
+                    // actualizar la lista de usuarios
+                    router.reload();                
+                }); 
+
             })
             .catch((error) => {
                 // Mostrar un mensaje de error
