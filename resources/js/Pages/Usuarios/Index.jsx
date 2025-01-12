@@ -19,11 +19,6 @@ function Index({ auth, usuarios, role, permissions }) {
         password: "",
         confirmPassword: "",
     });
-    //Obtiene permisos de backend
-    React.useEffect(() => {
-        console.log("permissions", permissions);
-        console.log("roles", role);
-    }, []);
 
     const [openModalCreateUsers, setOpenModalCreateUsers] =
         React.useState(false);

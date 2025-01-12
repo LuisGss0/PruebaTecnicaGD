@@ -25,7 +25,6 @@ const EditUserModal = ({ isOpen, onClose, userId }) => {
             // Fetch user data by ID
             axios.get(route("usuarios.show", userId)).then((response) => {
                 setUser(response.data.usuario);
-                console.log('response', response.data);
                 setData({
                     name: response.data.usuario.name || "",
                     email: response.data.usuario.email || "",
