@@ -12,6 +12,7 @@ use Illuminate\Support\Arr;
 use Inertia\Inertia;
 use Exception;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 
 class UsuarioController extends Controller
 {
@@ -108,17 +109,16 @@ class UsuarioController extends Controller
 
         // Validar los datos de cada fila
         $errors = [];
-        foreach ($data as $index => $row) {
-
-            $validatedData = validator($row, [
+        foreach ($data as $index => $row) {            
+            $validator = Validator::make($row, [
                 'name' => 'required|string|max:255',
-                'email' => 'required|string|email|max:255|unique:users',
+                'email' => 'required|string|email|max:255|unique:users,email',
                 'phone' => 'nullable|numeric|digits:10',
-                'password' => 'required|string|min:8'
-            ])->validate();
-
-            if (!empty($validatedData)) {
-                $errors[] = ['row' => $index + 2, 'errors' => $validatedData];
+                'password' => 'required|string|min:8',
+            ]);
+    
+            if ($validator->fails()) {
+                $errors[$index + 2] = $validator->errors()->all(); // +2 para ajustar el índice a la fila real en el archivo CSV
             }
         }
 
