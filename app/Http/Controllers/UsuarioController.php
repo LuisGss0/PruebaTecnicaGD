@@ -70,9 +70,7 @@ class UsuarioController extends Controller
             $user->assignRole($validatedData['role']);
 
 
-            return Inertia::render('Usuarios/Index', [
-                'usuarios' => User::latest()->paginate(5)
-            ])->with('success', 'Usuario creado correctamente');
+            return $this->index()->with('success', 'Usuario creado correctamente');
         } catch (Exception $e) {
             return redirect()->back()->withErrors(['error' => 'Error al crear el usuario: ' . $e->getMessage()])->withInput();
         }
@@ -109,14 +107,14 @@ class UsuarioController extends Controller
 
         // Validar los datos de cada fila
         $errors = [];
-        foreach ($data as $index => $row) {            
+        foreach ($data as $index => $row) {
             $validator = Validator::make($row, [
                 'name' => 'required|string|max:255',
                 'email' => 'required|string|email|max:255|unique:users,email',
                 'phone' => 'nullable|numeric|digits:10',
                 'password' => 'required|string|min:8',
             ]);
-    
+
             if ($validator->fails()) {
                 $errors[$index + 2] = $validator->errors()->all(); // +2 para ajustar el índice a la fila real en el archivo CSV
             }
@@ -146,9 +144,7 @@ class UsuarioController extends Controller
             DB::commit();
 
             //Retornar la vista de usuarios con mensaje de exito
-            return Inertia::render('Usuarios/Index', [
-                'usuarios' => User::latest()->paginate(5)
-            ])->with('success', 'Usuarios creados correctamente');
+            return $this->index()->with('success', 'Usuario creado correctamente');
         } catch (Exception $e) {
             DB::rollBack();
 
@@ -162,6 +158,11 @@ class UsuarioController extends Controller
     public function show(string $id)
     {
         $usuario = User::find($id);
+
+        if (!$usuario) {
+            return response()->json(['error' => 'Usuario no encontrado'], 404);
+        }
+
         //busca el role del usuario
         $role = $usuario->getRoleNames()->first();
 
@@ -219,9 +220,7 @@ class UsuarioController extends Controller
 
             $usuario->save();
 
-            return Inertia::render('Usuarios/Index', [
-                'usuarios' => User::latest()->paginate(5)
-            ])->with('success', 'Usuario actualizado correctamente');
+            return $this->index()->with('success', 'Usuario creado correctamente');
         } catch (Exception $e) {
             return redirect()->back()->withErrors(['error' => 'Error al actualizar el usuario: ' . $e->getMessage()])->withInput();
         }

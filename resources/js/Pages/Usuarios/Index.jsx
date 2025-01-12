@@ -12,13 +12,6 @@ import { Inertia } from "@inertiajs/inertia";
 import UploadCsvModal from "@/Components/UploadCsvModal";
 
 function Index({ auth, usuarios, role, permissions }) {
-    const { data, setData, post, processing, reset, errors } = useForm({
-        name: "",
-        email: "",
-        phone: "",
-        password: "",
-        confirmPassword: "",
-    });
 
     const [openModalCreateUsers, setOpenModalCreateUsers] =
         React.useState(false);
