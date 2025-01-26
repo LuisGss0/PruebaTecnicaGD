@@ -39,11 +39,6 @@ class DatabaseSeeder extends Seeder
 
         //crear rol de usuario y asignar permisos
         $roleUser = Role::create(['name' => 'User']); //Creamos un rol de usuario
-        $roleUser->syncPermissions(['create user']); //Asignamos permisos al rol de usuario
-        
-        //Creamos 10 usuarios con el rol de usuario
-        User::factory(10)->create()->each(function ($user) use ($roleUser) {
-            $user->assignRole($roleUser);
-        });
+        $roleUser->syncPermissions(['create user']); //Asignamos permisos al rol de usuario    
     }
 }
