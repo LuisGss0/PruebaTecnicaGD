@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\SendOrder;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Spatie\Permission\Models\Role;
@@ -28,7 +29,8 @@ class UsuarioController extends Controller
         $permissions = $user->getAllPermissions();
 
         //obtener todos los usuarios primero el mas actual y paginado 5        
-        $usuarios = User::latest()->paginate(5);
+        $usuarios = User::latest()->paginate(5);        
+        
         return Inertia::render('Usuarios/Index', [
             'usuarios' => $usuarios,
             'role' => $role,
@@ -220,6 +222,9 @@ class UsuarioController extends Controller
 
             $usuario->save();
 
+            
+            event(new SendOrder('Se edito un usuario'));
+
             return redirect()->route('usuarios.index')->with('success', 'Usuario creado correctamente');
         } catch (Exception $e) {
             return redirect()->back()->withErrors(['error' => 'Error al actualizar el usuario: ' . $e->getMessage()])->withInput();
@@ -244,5 +249,13 @@ class UsuarioController extends Controller
         } catch (Exception $e) {
             return response()->json(['error' => 'Error al eliminar el usuario: ' . $e->getMessage()], 500);
         }
+    }
+
+    public function sendNotification()
+    {
+        //event(new SendOrder('Se creo un usuario'));        
+
+        //Enviar notificación a todos los usuarios
+         event(new SendOrder('Se creo un usuario'));
     }
 }

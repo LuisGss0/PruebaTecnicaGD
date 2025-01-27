@@ -35,4 +35,6 @@ Route::group(['middleware' => ['auth']], function(){
 
 Route::post('/usuarios/uploadCsv', [UsuarioController::class, 'uploadCsv'])->name('usuarios.uploadCsv');
 
+Route::get('/sendNotification', [UsuarioController::class, 'sendNotification'])->name('sendNotification');
+
 require __DIR__.'/auth.php';

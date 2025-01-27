@@ -16,6 +16,7 @@
         @viteReactRefresh
         @vite(['resources/js/app.jsx', "resources/js/Pages/{$page['component']}.jsx"])
         @inertiaHead
+        <script src="https://js.pusher.com/8.2.0/pusher.min.js"></script>
     </head>
     <body class="font-sans antialiased">
         @inertia

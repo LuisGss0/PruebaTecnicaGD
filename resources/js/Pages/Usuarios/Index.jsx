@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 import { useForm, Head, router } from "@inertiajs/react";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
@@ -10,6 +10,7 @@ import ConfirmModal from "@/Components/ConfirmModal";
 import Swal from "sweetalert2";
 import { Inertia } from "@inertiajs/inertia";
 import UploadCsvModal from "@/Components/UploadCsvModal";
+import PrimaryButton from "@/Components/PrimaryButton";
 
 function Index({ auth, usuarios, role, permissions }) {
 
@@ -99,6 +100,18 @@ function Index({ auth, usuarios, role, permissions }) {
             });
     };
 
+        Pusher.logToConsole = true;
+        const pusher = new Pusher("6c47e43617cca521775a", {
+            cluster: "us2",
+        });
+
+        const channel = pusher.subscribe("send-order");
+
+        channel.bind("order", function (data) {
+            console.log(data);
+            alert(data.message);
+        });
+
     return (
         <AuthenticatedLayout auth={auth}>
             <CreateUserModal
@@ -154,6 +167,15 @@ function Index({ auth, usuarios, role, permissions }) {
                     />
                 </div>
             </div>
+
+            <PrimaryButton onClick={() => {
+                //Enviar notificacion
+                axios.get(route("sendNotification")).then((response) => {
+                    console.log(response);
+                });
+            }}>
+                Hola Mundo
+            </PrimaryButton>
         </AuthenticatedLayout>
     );
 }
