@@ -256,6 +256,8 @@ class UsuarioController extends Controller
         //event(new SendOrder('Se creo un usuario'));        
 
         //Enviar notificación a todos los usuarios
-         event(new SendOrder('Se creo un usuario'));
+        $lol = event(new SendOrder('Se creo un usuario'));
+
+         return response()->json(['success' => 'Notificación enviada correctamente', $lol]);
     }
 }
