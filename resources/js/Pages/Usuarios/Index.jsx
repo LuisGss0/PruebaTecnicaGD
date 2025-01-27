@@ -101,7 +101,7 @@ function Index({ auth, usuarios, role, permissions }) {
     };
 
         Pusher.logToConsole = true;
-        const pusher = new Pusher(import.meta.env.VITE_PUSHER_APP_KEY, {
+        const pusher = new Pusher(process.env.PUSHER_APP_KEY, {
             cluster: "us2",
         });
 
@@ -111,6 +111,9 @@ function Index({ auth, usuarios, role, permissions }) {
             console.log(data);
             alert(data.message);
         });
+
+        console.log('PUSHER_APP_KEY:', process.env.PUSHER_APP_KEY);
+        console.log('PUSHER_APP_CLUSTER:', process.env.PUSHER_APP_CLUSTER);
 
     return (
         <AuthenticatedLayout auth={auth}>
