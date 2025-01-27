@@ -48,15 +48,12 @@ return [
 
         'pusher' => [
             'driver' => 'pusher',
-            'key' => '6c47e43617cca521775a',
-            'secret' => 'b96c1686fe58206c505f',
-            'app_id' => '1932035',
+            'key' => env('PUSHER_APP_KEY'),
+            'secret' => env('PUSHER_APP_SECRET'),
+            'app_id' => env('PUSHER_APP_ID'),
             'options' => [
-                'cluster' => 'us2',                
+                'cluster' => env('PUSHER_APP_CLUSTER'),
                 'useTLS' => true,
-            ],
-            'client_options' => [
-                // Guzzle client options: https://docs.guzzlephp.org/en/stable/request-options.html
             ],
         ],
 

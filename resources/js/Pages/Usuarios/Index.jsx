@@ -101,7 +101,7 @@ function Index({ auth, usuarios, role, permissions }) {
     };
 
         Pusher.logToConsole = true;
-        const pusher = new Pusher("6c47e43617cca521775a", {
+        const pusher = new Pusher(import.meta.env.VITE_PUSHER_APP_KEY, {
             cluster: "us2",
         });
 
