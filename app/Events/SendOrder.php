@@ -11,7 +11,7 @@ use Illuminate\Contracts\Broadcasting\ShouldBroadcastNow;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-class SendOrder implements ShouldBroadcastNow
+class SendOrder implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
