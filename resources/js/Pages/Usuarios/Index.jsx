@@ -100,7 +100,7 @@ function Index({ auth, usuarios, role, permissions }) {
             });
     };
 
-        Pusher.logToConsole = true;
+       
         const pusher = new Pusher(import.meta.env.VITE_PUSHER_APP_KEY, {
             cluster: "us2",
         });
@@ -108,12 +108,8 @@ function Index({ auth, usuarios, role, permissions }) {
         const channel = pusher.subscribe("send-order");
 
         channel.bind("order", function (data) {
-            console.log(data);
             alert(data.message);
         });
-
-        console.log('PUSHER_APP_KEY:', import.meta.env.VITE_PUSHER_APP_KEY);
-        console.log('PUSHER_APP_CLUSTER:', import.meta.env.VITE_PUSHER_APP_CLUSTER);
 
     return (
         <AuthenticatedLayout auth={auth}>
@@ -174,7 +170,7 @@ function Index({ auth, usuarios, role, permissions }) {
             <PrimaryButton onClick={() => {
                 //Enviar notificacion
                 axios.get(route("sendNotification")).then((response) => {
-                    console.log(response);
+                   //console.log(response);
                 });
             }}>
                 Hola Mundo
